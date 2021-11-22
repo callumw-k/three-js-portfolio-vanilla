@@ -1,0 +1,39 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+:root {
+  --small-space: 1rem;
+  --medium-space: 2rem;
+  --large-space: 4rem;
+  --xlarge-space: 8rem;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+header {
+  background-color: white;
+  margin-top: var(--xlarge-space);
+  border-radius: var(--small-space);
+  padding: var(--medium-space) var(--small-space);
+  grid-column: 2/8;
+}
