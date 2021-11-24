@@ -1,0 +1,5 @@
+@mixin breakpoint_sm {
+  @media screen and (min-width: (768px)) {
+    @content;
+  }
+}

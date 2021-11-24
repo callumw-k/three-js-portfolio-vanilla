@@ -30,13 +30,22 @@ camera.position.setZ(30);
 
 renderer.render(scene, camera);
 
+//create a function that updates the three.js canvas size on window resize
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener("resize", onWindowResize, false);
+
 const geometry = new Three.TorusGeometry(10, 3, 16, 100);
 const material = new Three.MeshStandardMaterial({ color: 0x000000 });
 const torus = new Three.Mesh(geometry, material);
 // scene.add(torus);
 
 const pointLight = new Three.PointLight(0xffffff);
-pointLight.position.set(20, 20, 20);
+pointLight.position.set(5, 5, 5);
 
 const ambientLight = new Three.AmbientLight(0xffffff);
 
@@ -61,56 +70,75 @@ function addStar() {
 
 Array(200).fill().forEach(addStar);
 
-const spaceTexture = new Three.TextureLoader().load("./images/space-2.png");
-scene.background = spaceTexture;
-
-const callumTexture = new Three.TextureLoader().load("callum.png");
-
-const callum = new Three.Mesh(
-  new Three.BoxGeometry(3, 3, 3),
-  new Three.MeshBasicMaterial({ map: callumTexture })
+const spaceTexture = new Three.TextureLoader().load(
+  "https://res.cloudinary.com/callum-wellwood-kane/image/upload/v1637741079/My%20Website/space-2_mjb1tk.png"
 );
+scene.background = spaceTexture;
 
 // scene.add(callum);
 
-const marsTexture = new Three.TextureLoader().load("2k_mars.jpg");
+const marsTexture = new Three.TextureLoader().load(
+  "https://res.cloudinary.com/callum-wellwood-kane/image/upload/v1637741080/My%20Website/2k_mars_ll797s.jpg"
+);
 const mars = new Three.Mesh(
   new Three.SphereGeometry(3, 32, 32),
   new Three.MeshBasicMaterial({ map: marsTexture })
 );
 
-mars.position.z = 30;
-mars.position.setX(-10);
+mars.position.z = 10;
+mars.position.setX(-5);
+mars.position.y = -10;
 
 let t = 0;
 let prev = 0;
-let cup = 0;
-let cdown = 0;
+
+const mouseWheel = (e) => {
+  let delta = e.deltaY;
+  delta = delta / 100;
+  delta = -delta;
+  console.log(delta);
+  if (delta <= 0) {
+    delta -= camera.position.y * 0.1;
+  } else {
+    delta += camera.position.y * 0.1;
+  }
+  if (camera.position.y + delta > 1 && camera.position.y + delta < 200) {
+    camera.translateY(delta);
+  }
+};
+
+const mouseWheel2 = (e) => {
+  let delta = e.deltaY;
+  delta = -delta;
+  console.log(delta);
+  if (delta <= 0) {
+    delta -= camera.position.y * 0.1;
+  } else {
+    delta += camera.position.y * 0.1;
+  }
+  camera.position.y += delta * 0.001;
+};
 function scrollFunc() {
   t = document.body.getBoundingClientRect().top;
-  console.log(t, cup, cdown);
   if (t <= prev) {
-    mars.rotation.x += 0.05;
-    mars.rotation.y += 0.075;
-    cdown += 1;
-    mars.rotation.z += 0.05;
+    mars.rotation.x += 0.005;
+    mars.rotation.y += 0.0075;
+    mars.rotation.z += 0.005;
 
-    camera.position.z += t * -0.01;
-    camera.position.x += t * -0.0002;
-    camera.position.y += t * -0.0002;
+    //    camera.position.z += t * -0.01;
+    // camera.position.x += t * 0.0002;
+    camera.position.y += t * 0.0001;
   } else {
-    mars.rotation.x += -0.05;
-    mars.rotation.y += -0.075;
-    cup += 1;
-    mars.rotation.z += -0.05;
-
-    camera.position.z += t * 0.01;
-    camera.position.x += t * 0.0002;
-    camera.position.y += t * 0.0002;
+    mars.rotation.x += 0.005;
+    mars.rotation.y += 0.0075;
+    mars.rotation.z += 0.005;
+    // camera.position.z += t * 0.01;
+    // camera.position.x += t * 0.0002;
+    camera.position.y += t * -0.0002;
   }
   prev = t;
 }
-document.addEventListener("scroll", throttled(10, scrollFunc));
+document.addEventListener("wheel", throttled(10, mouseWheel2));
 
 scene.add(mars);
 function animate() {

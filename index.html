@@ -2,23 +2,147 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Callum Wellwood-Kane | Front-end Developer</title>
+    <meta name="title" content="Callum Wellwood-Kane | Front-end Developer" />
+    <meta
+      name="description"
+      content="A front-end developer focused on my development from a holistic perspective, how it can assist and grow a business or product."
+    />
+    <meta name="keywords" content="callum wellwood-kane, front-end developer" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
     <canvas id="bg"></canvas>
     <main>
       <header>
-      <h1>Hi, I'm Callum</h1>
+        <h1>Hi, I'm Callum</h1>
       </header>
-      <section class="about bg-white">
-        <h2 >
-          Combining front-end developer skills with a focus on business.
-        </h2>
+      <section class="about">
+        <div class="about__inner">
+          <h2>
+            A front-end developer focused on my development from a holistic
+            perspective, how it can assist and grow a business or product.
+          </h2>
+        </div>
+      </section>
+      <section class="work">
+        <div class="work__sticky">
+          <h2>My Work</h2>
+        </div>
+        <div class="work__inner">
+          <div class="work__item work__ja">
+            <h3><a href="https://aidenkinder.com"></a>Journey Advenia</h3>
+            <h4>Tech Stack:</h4>
+            <p>React | Gatsby | Emotion | Stripe API & Checkout</p>
+
+            <h4>Brief:</h4>
+            <p>
+              Aiden wanted a fast, minimalist website to sell his fiction novel,
+              Journey Advenia. It needed to be able to process payments and
+              notify Aiden of shipping details and customer purchases.
+            </p>
+            <h4>Overview & Rationale:</h4>
+            <p>
+              I settled on React and Gatsby as the front end frameworks. Gatsby
+              meant the website would be exceptionally fast, as it statically
+              generates the site at build time. Alongside this, using React
+              allowed me to build out components quickly, using Emotion to
+              create styled-components. Unfortunately, due to the release time
+              frame getting moved forward, there wasn't time to build a custom
+              checkout (which I planned initially). As a result, I integrated
+              the website with Stripe Checkout. This means Aiden can modify
+              product details through his Stripe dashboard, with the changes
+              reflected through the website via API requests. Load times for
+              aidenkinder.com hover around 200ms to 400ms (as measured by
+              pingdom.com). These speeds allow for a great customer experience
+              and make ordering Journey Advenia fast and simple.
+            </p>
+          </div>
+          <div class="work__item work__ico">
+            <h3>
+              <a href="https://google.com"></a>Python ICO (Initial Coin
+              Offering) Scalper
+            </h3>
+            <h4>Tech Stack:</h4>
+            <p>Python | Nuitka | Gate.io & Kucoin API</p>
+            <h4>Brief:</h4>
+            <p>
+              When new cryptocurrencies list on an exchange, the price generally
+              increases in the initial 30-60 seconds after listing and then
+              drops. I wanted to create a bot that would allow me to buy in as
+              soon as possible after the token went live and sell once I had hit
+              a certain profit. Hopefully, this would allow me to enter trades
+              quicker than someone manually trading through the browser.
+              Alongside this, the running profit percentage allowed me to best
+              gauge when to take profits.
+            </p>
+            <h4>Overview & Rationale:</h4>
+            <p>
+              I chose Python to create the bot, as its easy syntax allowed me to
+              get an MVP up and running quickly. It also had great SDKs for both
+              Gate.io and Kucoin, which served as a wrapper for the API calls.
+            </p>
+            <p>I planned out the bot in fours stages:</p>
+            <ol>
+              <li>
+                Keep pinging the API to see if the order book is available for
+                the new coin (when the order book goes live, it means you can
+                trade the token).
+              </li>
+              <li>
+                Continuously check my account balance to see if I was holding
+                any of the token, and if not keep placing buy orders.
+              </li>
+              <li>
+                Calculate a running profit/loss percentage from the current USD
+                value compared to the initial USD value.
+              </li>
+              <li>
+                Sell at either a pre-determined profit target or manually upon
+                hitting the enter key.
+              </li>
+            </ol>
+          </div>
+          <div class="work__item work__ico">
+            <h3><a href="https://google.com"></a>This Website</h3>
+            <h4>Tech Stack:</h4>
+            <p>Good ol' HTML, CSS & Javascript | Vite | Three.js</p>
+            <h4>Brief:</h4>
+            <p>
+              I needed to get something up fast as a portfolio piece for a job
+              application. However, I still wanted the website to do something
+              cool and demonstrate some front-end skillsets. I took inspiration
+              from The Virtual Economy's website and created this, a
+              space-themed interactive webpage. (I love space).
+            </p>
+            <h4>Overview & Rationale:</h4>
+            <p>
+              I considered spinning up a React, Next or Gatsby template for the
+              project. However, I'd played around with Vite and noticed they had
+              a "vanilla js" option. It'd be a while since I built anything out
+              of pure HTML, CSS (well, SCSS, but still), and Javascript, so I
+              thought I'd go back to my roots and use that as the "tech stack".
+              In the end, three.js was going to be the primary focus, not a
+              fancy framework. As far as websites go, this one isn't crazy. But
+              it'll serve as a testing ground for cool three.js projects going
+              forward. It doesn't take much to add to the website, and I'll
+              likely keep it as a single page so I won't have to worry too much
+              about components, i.e. navbar etc.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
-
 
     <script type="module" src="/main.js"></script>
   </body>

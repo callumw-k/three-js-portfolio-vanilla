@@ -1,9 +1,12 @@
+@import "mixins";
+
 :root {
   --small-space: 1rem;
   --medium-space: 2rem;
   --large-space: 4rem;
   --xlarge-space: 8rem;
 }
+
 /* teko-regular - latin */
 @font-face {
   font-family: "Teko";
@@ -13,7 +16,6 @@
   src: local(""),
     url("../fonts/teko-v10-latin-regular.eot?#iefix")
       format("embedded-opentype"),
-
     /* IE6-IE8 */ url("../fonts/teko-v10-latin-regular.woff2") format("woff2"),
     /* Super Modern Browsers */ url("../fonts/teko-v10-latin-regular.woff")
       format("woff"),
@@ -106,11 +108,19 @@ body {
   font-weight: 400;
   line-height: 1.75;
   color: #000000;
+  background-color: black;
 }
 
+ul,
+ol,
 p {
   font-family: "Poppins", serif;
   margin-bottom: 1rem;
+}
+
+ul,
+ol {
+  padding-left: 1.5rem;
 }
 
 h1,
@@ -118,7 +128,7 @@ h2,
 h3,
 h4,
 h5 {
-  margin: 3rem 0 1.38rem;
+  margin: 1.38rem 0 1.38rem;
   font-family: "Teko", sans-serif;
   font-weight: 400;
   line-height: 1.3;
@@ -161,9 +171,12 @@ main {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 10;
   display: grid;
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: auto;
 }
@@ -180,6 +193,51 @@ header {
 }
 
 .about {
-  grid-column: 4 / -4;
+  grid-column: 2/ -2;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include breakpoint_sm {
+    grid-column: 4 / -4;
+  }
+}
+
+.about__inner {
+  background-color: white;
+
   padding: var(--small-space);
+  h2 {
+    margin: 0;
+  }
+}
+
+.work {
+  grid-column: 2 / -2;
+  min-height: 100vh;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-items: start;
+}
+
+.work__sticky {
+  padding: var(--small-space);
+  grid-column: span 8;
+  @include breakpoint_sm {
+    grid-column: 1 / span 2;
+    position: sticky;
+    top: 10px;
+  }
+}
+.work__inner {
+  grid-column: 1 / -1;
+  @include breakpoint_sm {
+    grid-column: 4 /-1;
+  }
+}
+.work__item {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: var(--small-space);
+  margin-bottom: var(--medium-space);
 }

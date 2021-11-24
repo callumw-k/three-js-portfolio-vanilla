@@ -1,0 +1,9 @@
+#!/bin/sh
+USER=callum_admin
+HOST=vps.callumwk.com
+PORT=950
+DIR=/var/www/callumwk.com/html/
+
+rsync -avz --delete -e "ssh -p ${PORT}" dist/ ${USER}@${HOST}:${DIR}
+
+exit 0
