@@ -98,9 +98,9 @@ const mouseWheel = (e) => {
   delta = -delta;
   console.log(delta);
   if (delta <= 0) {
-    delta -= camera.position.y * 0.1;
+    delta -= camera.position.y * 0.001;
   } else {
-    delta += camera.position.y * 0.1;
+    delta += camera.position.y * 0.001;
   }
   if (camera.position.y + delta > 1 && camera.position.y + delta < 200) {
     camera.translateY(delta);
@@ -110,31 +110,37 @@ const mouseWheel = (e) => {
 const mouseWheel2 = (e) => {
   let delta = e.deltaY;
   delta = -delta;
-  console.log(delta);
-  if (delta <= 0) {
-    delta -= camera.position.y * 0.1;
+  if (delta < 0) {
+    mars.position.x += 0.1;
+    camera.position.y += delta * 0.002;
   } else {
-    delta += camera.position.y * 0.1;
+    mars.position.x -= 0.1;
+    camera.position.y += delta * 0.002;
   }
-  camera.position.y += delta * 0.001;
+  mars.rotation.x += 0.05;
+  mars.rotation.y += 0.075;
+  mars.rotation.z += 0.05;
 };
 function scrollFunc() {
   t = document.body.getBoundingClientRect().top;
+  console.log(t);
   if (t <= prev) {
-    mars.rotation.x += 0.005;
-    mars.rotation.y += 0.0075;
-    mars.rotation.z += 0.005;
+    mars.rotation.x += 0.05;
+    mars.rotation.y += 0.075;
+    mars.rotation.z += 0.05;
+    mars.position.x += 0.1;
 
     //    camera.position.z += t * -0.01;
     // camera.position.x += t * 0.0002;
-    camera.position.y += t * 0.0001;
+    camera.position.y += t * 0.0002;
   } else {
-    mars.rotation.x += 0.005;
-    mars.rotation.y += 0.0075;
-    mars.rotation.z += 0.005;
+    mars.rotation.x += 0.05;
+    mars.rotation.y += 0.075;
+    mars.rotation.z += 0.05;
+    mars.position.x -= 0.1;
     // camera.position.z += t * 0.01;
     // camera.position.x += t * 0.0002;
-    camera.position.y += t * -0.0002;
+    camera.position.y -= t * 0.0002;
   }
   prev = t;
 }
