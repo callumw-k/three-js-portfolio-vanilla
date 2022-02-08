@@ -86,7 +86,7 @@ const mars = new Three.Mesh(
 );
 
 mars.position.z = 10;
-mars.position.setX(-5);
+mars.position.x = -5;
 mars.position.y = -10;
 
 let t = 0;
@@ -94,66 +94,71 @@ let prev = 0;
 
 const mouseWheel = (e) => {
   let delta = e.deltaY;
-  delta = delta / 100;
-  delta = -delta;
-  console.log(delta);
-  if (delta <= 0) {
-    delta -= camera.position.y * 0.001;
-  } else {
-    delta += camera.position.y * 0.001;
-  }
-  if (camera.position.y + delta > 1 && camera.position.y + delta < 200) {
-    camera.translateY(delta);
-  }
-};
-
-const mouseWheel2 = (e) => {
-  let delta = e.deltaY;
   delta = -delta;
   if (delta < 0) {
-    mars.position.x += 0.1;
     camera.position.y += delta * 0.002;
   } else {
-    mars.position.x -= 0.1;
     camera.position.y += delta * 0.002;
   }
-  mars.rotation.x += 0.05;
-  mars.rotation.y += 0.075;
-  mars.rotation.z += 0.05;
 };
 function scrollFunc() {
   t = document.body.getBoundingClientRect().top;
-  console.log(t);
   if (t <= prev) {
-    mars.rotation.x += 0.05;
-    mars.rotation.y += 0.075;
-    mars.rotation.z += 0.05;
-    mars.position.x += 0.1;
+    // mars.rotation.x += 0.05;
+    //mars.rotation.y += 0.075;
+    //mars.rotation.z += 0.05;
 
     //    camera.position.z += t * -0.01;
     // camera.position.x += t * 0.0002;
-    camera.position.y += t * 0.0002;
+    camera.position.y += t * 0.00005;
   } else {
-    mars.rotation.x += 0.05;
-    mars.rotation.y += 0.075;
-    mars.rotation.z += 0.05;
-    mars.position.x -= 0.1;
+    //    mars.rotation.x += 0.05;
+    //    mars.rotation.y += 0.075;
+    //    mars.rotation.z += 0.05;
     // camera.position.z += t * 0.01;
     // camera.position.x += t * 0.0002;
-    camera.position.y -= t * 0.0002;
+    camera.position.y -= t * 0.00005;
   }
   prev = t;
 }
-document.addEventListener("wheel", throttled(10, mouseWheel2));
+document.addEventListener("wheel", throttled(10, mouseWheel));
+if (window.innerWidth < 768) {
+  document.addEventListener("scroll", scrollFunc);
+}
 
 scene.add(mars);
 function animate() {
   requestAnimationFrame(animate);
-  torus.rotation.x += 0.01;
-  torus.rotation.y += 0.01;
-  torus.rotation.z += 0.01;
+  mars.rotation.x += 0.01;
+  mars.rotation.y += 0.01;
+  mars.rotation.z += 0.01;
+  mars.position.x += 0.004;
+  camera.position.y += t * 0.0001;
   // controls.update();
   renderer.render(scene, camera);
 }
 
 animate();
+
+const navMenu = document.querySelector(".nav__menu__icon");
+const navLinkWrapper = document.querySelector(".nav__links");
+const navLinks = document.querySelectorAll(".nav__links a");
+
+//create a function that toggles the classes visible and closed on click
+
+navMenu.addEventListener("click", () => {
+  if (navLinkWrapper.classList.contains("hidden")) {
+    navLinkWrapper.classList.remove("hidden");
+    navLinkWrapper.classList.add("visible");
+  } else {
+    navLinkWrapper.classList.add("hidden");
+    navLinkWrapper.classList.remove("visible");
+  }
+});
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinkWrapper.classList.add("hidden");
+    navLinkWrapper.classList.remove("visible");
+  });
+});
