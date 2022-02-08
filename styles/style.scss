@@ -101,7 +101,10 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 100%;
+  @media screen and (min-width: 1024px) {
+    font-size: 112.5%;
+  }
 } /*16px*/
 
 body {
@@ -144,6 +147,17 @@ h2 {
   font-size: 3.157rem;
 }
 
+a {
+  font-family: "Poppins", serif;
+  color: black;
+  text-decoration: none;
+  transition: 250ms opacity;
+  &:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+}
+
 h3 {
   font-size: 2.369rem;
 }
@@ -164,12 +178,58 @@ small,
 canvas {
   position: fixed;
   top: 0;
+  height: 100%;
   left: 0;
   z-index: 0;
 }
 
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  justify-content: end;
+  padding-top: var(--medium-space);
+  max-width: 1280px;
+  margin: 0 auto;
+  z-index: 999;
+  svg {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.nav__inner {
+  grid-column: 11;
+  display: flex;
+  justify-self: end;
+  position: relative;
+}
+
+.nav__links {
+  position: absolute;
+  background-color: white;
+  padding: var(--x-small-space) var(--medium-space);
+  margin-top: 0.25rem;
+  transition: 250mx opacity;
+  &.hidden {
+    left: -999px;
+    opacity: 0;
+  }
+  &.visible {
+    left: initial;
+    right: 0;
+    top: 100%;
+    opacity: 1;
+  }
+}
 main {
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
   right: 0;
